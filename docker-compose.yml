@@ -20,16 +20,6 @@ services:
       default:
         aliases:
           - dev.budget.com
-  # db:
-  #   image: library/mysql:5.6.22
-  #   container_name: budget_db
-  #   ports:
-  #     - "3306:3306"
-  #   environment:
-  #     - MYSQL_ROOT_PASSWORD=admin
-  #     - MYSQL_DATABASE=dev_budget_db
-  #     - MYSQL_USER=root
-  #     - MYSQL_PASSWORD=admin
 
   db:
     image: "postgres:11"
