@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Transaction Headers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Transaction date</th>
+      <th>Account</th>
+      <th>Supplier</th>
+      <th>Sign</th>
+      <th>Reconciled</th>
+      <th>Total</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transaction_headers.each do |transaction_header| %>
+      <tr>
+        <td><%= transaction_header.user %></td>
+        <td><%= transaction_header.transaction_date %></td>
+        <td><%= transaction_header.account %></td>
+        <td><%= transaction_header.supplier %></td>
+        <td><%= transaction_header.sign %></td>
+        <td><%= transaction_header.reconciled %></td>
+        <td><%= transaction_header.total %></td>
+        <td><%= link_to 'Show', transaction_header %></td>
+        <td><%= link_to 'Edit', edit_transaction_header_path(transaction_header) %></td>
+        <td><%= link_to 'Destroy', transaction_header, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Transaction Header', new_transaction_header_path %>

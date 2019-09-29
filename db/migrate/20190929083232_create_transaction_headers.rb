@@ -1,6 +1,6 @@
-class CreateTransactions < ActiveRecord::Migration[5.1]
+class CreateTransactionHeaders < ActiveRecord::Migration[5.1]
   def change
-    create_table :transactions do |t|
+    create_table :transaction_headers do |t|
       t.integer :user
       t.date :transaction_date
       t.integer :account

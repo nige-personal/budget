@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @transaction_header.user %>
+</p>
+
+<p>
+  <strong>Transaction date:</strong>
+  <%= @transaction_header.transaction_date %>
+</p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @transaction_header.account %>
+</p>
+
+<p>
+  <strong>Supplier:</strong>
+  <%= @transaction_header.supplier %>
+</p>
+
+<p>
+  <strong>Sign:</strong>
+  <%= @transaction_header.sign %>
+</p>
+
+<p>
+  <strong>Reconciled:</strong>
+  <%= @transaction_header.reconciled %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  <%= @transaction_header.total %>
+</p>
+
+<%= link_to 'Edit', edit_transaction_header_path(@transaction_header) %> |
+<%= link_to 'Back', transaction_headers_path %>

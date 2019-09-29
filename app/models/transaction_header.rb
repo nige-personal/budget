@@ -1,0 +1,2 @@
+class TransactionHeader < ApplicationRecord
+end

@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190929080751) do
+ActiveRecord::Schema.define(version: 20190929083239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "transactions", force: :cascade do |t|
+  create_table "transaction_headers", force: :cascade do |t|
     t.integer "user"
     t.date "transaction_date"
     t.integer "account"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20190929080751) do
     t.decimal "total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "transaction_items", force: :cascade do |t|
+    t.integer "category"
+    t.decimal "amount"
+    t.string "description"
+    t.bigint "transaction_header_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["transaction_header_id"], name: "index_transaction_items_on_transaction_header_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -39,4 +49,5 @@ ActiveRecord::Schema.define(version: 20190929080751) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "transaction_items", "transaction_headers"
 end

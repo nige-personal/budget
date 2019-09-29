@@ -4,7 +4,6 @@ one:
   user: 1
   transaction_date: 2019-09-29
   account: 1
-  category: 1
   supplier: 1
   sign: MyString
   reconciled: 2019-09-29
@@ -14,7 +13,6 @@ two:
   user: 1
   transaction_date: 2019-09-29
   account: 1
-  category: 1
   supplier: 1
   sign: MyString
   reconciled: 2019-09-29
