@@ -69,6 +69,6 @@ class TransactionHeadersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_header_params
-      params.require(:transaction_header).permit(:user, :transaction_date, :account, :supplier, :sign, :reconciled, :total)
+      params.require(:transaction_header).permit(:user_id, :transaction_date, :account_id, :supplier_id, :sign, :reconciled, :total)
     end
 end

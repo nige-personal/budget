@@ -17,7 +17,7 @@ class TransactionHeadersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create transaction_header" do
     assert_difference('TransactionHeader.count') do
-      post transaction_headers_url, params: { transaction_header: { account: @transaction_header.account, reconciled: @transaction_header.reconciled, sign: @transaction_header.sign, supplier: @transaction_header.supplier, total: @transaction_header.total, transaction_date: @transaction_header.transaction_date, user: @transaction_header.user } }
+      post transaction_headers_url, params: { transaction_header: { account_id: @transaction_header.account_id, reconciled: @transaction_header.reconciled, sign: @transaction_header.sign, supplier_id: @transaction_header.supplier_id, total: @transaction_header.total, transaction_date: @transaction_header.transaction_date, user_id: @transaction_header.user_id } }
     end
 
     assert_redirected_to transaction_header_url(TransactionHeader.last)
@@ -34,7 +34,7 @@ class TransactionHeadersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update transaction_header" do
-    patch transaction_header_url(@transaction_header), params: { transaction_header: { account: @transaction_header.account, reconciled: @transaction_header.reconciled, sign: @transaction_header.sign, supplier: @transaction_header.supplier, total: @transaction_header.total, transaction_date: @transaction_header.transaction_date, user: @transaction_header.user } }
+    patch transaction_header_url(@transaction_header), params: { transaction_header: { account_id: @transaction_header.account_id, reconciled: @transaction_header.reconciled, sign: @transaction_header.sign, supplier_id: @transaction_header.supplier_id, total: @transaction_header.total, transaction_date: @transaction_header.transaction_date, user_id: @transaction_header.user_id } }
     assert_redirected_to transaction_header_url(@transaction_header)
   end
 

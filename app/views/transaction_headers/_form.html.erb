@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :user %>
-    <%= form.number_field :user, id: :transaction_header_user %>
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, id: :transaction_header_user_id %>
   </div>
 
   <div class="field">
@@ -22,13 +22,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :account %>
-    <%= form.number_field :account, id: :transaction_header_account %>
+    <%= form.label :account_id %>
+    <%= form.text_field :account_id, id: :transaction_header_account_id %>
   </div>
 
   <div class="field">
-    <%= form.label :supplier %>
-    <%= form.number_field :supplier, id: :transaction_header_supplier %>
+    <%= form.label :supplier_id %>
+    <%= form.text_field :supplier_id, id: :transaction_header_supplier_id %>
   </div>
 
   <div class="field">

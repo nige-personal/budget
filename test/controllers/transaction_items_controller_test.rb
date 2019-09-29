@@ -17,7 +17,7 @@ class TransactionItemsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create transaction_item" do
     assert_difference('TransactionItem.count') do
-      post transaction_items_url, params: { transaction_item: { amount: @transaction_item.amount, category: @transaction_item.category, description: @transaction_item.description, transaction_header_id: @transaction_item.transaction_header_id } }
+      post transaction_items_url, params: { transaction_item: { amount: @transaction_item.amount, category_id: @transaction_item.category_id, description: @transaction_item.description, transaction_header_id: @transaction_item.transaction_header_id } }
     end
 
     assert_redirected_to transaction_item_url(TransactionItem.last)
@@ -34,7 +34,7 @@ class TransactionItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update transaction_item" do
-    patch transaction_item_url(@transaction_item), params: { transaction_item: { amount: @transaction_item.amount, category: @transaction_item.category, description: @transaction_item.description, transaction_header_id: @transaction_item.transaction_header_id } }
+    patch transaction_item_url(@transaction_item), params: { transaction_item: { amount: @transaction_item.amount, category_id: @transaction_item.category_id, description: @transaction_item.description, transaction_header_id: @transaction_item.transaction_header_id } }
     assert_redirected_to transaction_item_url(@transaction_item)
   end
 

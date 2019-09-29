@@ -10,30 +10,81 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190929083239) do
+ActiveRecord::Schema.define(version: 20190929104428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "account_users", force: :cascade do |t|
+    t.bigint "account_id"
+    t.bigint "user_id"
+    t.string "privilege"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_account_users_on_account_id"
+    t.index ["user_id"], name: "index_account_users_on_user_id"
+  end
+
+  create_table "accounts", force: :cascade do |t|
+    t.string "name"
+    t.string "account_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.bigint "account_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_categories_on_account_id"
+    t.index ["group_id"], name: "index_categories_on_group_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.bigint "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_groups_on_account_id"
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "location"
+    t.bigint "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_suppliers_on_account_id"
+  end
+
   create_table "transaction_headers", force: :cascade do |t|
-    t.integer "user"
+    t.bigint "user_id"
     t.date "transaction_date"
-    t.integer "account"
-    t.integer "supplier"
+    t.bigint "account_id"
+    t.bigint "supplier_id"
     t.string "sign"
     t.date "reconciled"
     t.decimal "total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_transaction_headers_on_account_id"
+    t.index ["supplier_id"], name: "index_transaction_headers_on_supplier_id"
+    t.index ["user_id"], name: "index_transaction_headers_on_user_id"
   end
 
   create_table "transaction_items", force: :cascade do |t|
-    t.integer "category"
+    t.bigint "category_id"
     t.decimal "amount"
     t.string "description"
     t.bigint "transaction_header_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_transaction_items_on_category_id"
     t.index ["transaction_header_id"], name: "index_transaction_items_on_transaction_header_id"
   end
 
@@ -49,5 +100,15 @@ ActiveRecord::Schema.define(version: 20190929083239) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "account_users", "accounts"
+  add_foreign_key "account_users", "users"
+  add_foreign_key "categories", "accounts"
+  add_foreign_key "categories", "groups"
+  add_foreign_key "groups", "accounts"
+  add_foreign_key "suppliers", "accounts"
+  add_foreign_key "transaction_headers", "accounts"
+  add_foreign_key "transaction_headers", "suppliers"
+  add_foreign_key "transaction_headers", "users"
+  add_foreign_key "transaction_items", "categories"
   add_foreign_key "transaction_items", "transaction_headers"
 end
