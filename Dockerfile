@@ -11,14 +11,8 @@ RUN apk update \
     && apk add --update --no-cache $BUILD_PACKAGES $DEV_PACKAGES $RUBY_PACKAGES
 # install rubygem
 COPY Gemfile Gemfile.lock $RAILS_ROOT/
-RUN bundle config --global frozen 1 \
-    && bundle install --without development:test:assets -j4 --retry 3 --path=vendor/bundle \
-    # Remove unneeded files (cached *.gem, *.o, *.c)
-    && rm -rf vendor/bundle/ruby/2.5.0/cache/*.gem \
-    && find vendor/bundle/ruby/2.5.0/gems/ -name "*.c" -delete \
-    && find vendor/bundle/ruby/2.5.0/gems/ -name "*.o" -delete
-RUN yarn install
 COPY . .
+RUN bundle config --global frozen 1 && bundle install
 
 ############### Build step done ###############
 FROM ruby:2.5.1-alpine
