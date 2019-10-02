@@ -1,10 +1,10 @@
-<%= form_with(model: category, local: true) do |form| %>
+<%= form_for(@category) do |form| %>
   <% if category.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
 
       <ul>
-      <% category.errors.full_messages.each do |message| %>
+      <% @category.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -23,12 +23,11 @@
 
   <div class="field">
     <%= form.label :account_id %>
-    <%= form.text_field :account_id, id: :category_account_id %>
+    <%= form.collection_select :account_id, @user_accounts, :id, :name, {:include_blank => 'Select an Account'}, {id: 'accounts_select', onchange: "return groups_for(this);"} %>
   </div>
 
-  <div class="field">
-    <%= form.label :group_id %>
-    <%= form.text_field :group_id, id: :category_group_id %>
+  <div id="groups">
+
   </div>
 
   <div class="actions">

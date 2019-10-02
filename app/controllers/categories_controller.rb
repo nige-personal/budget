@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :form_dropdown_values, only: %i(new create edit)
 
   # GET /categories
   # GET /categories.json
@@ -25,6 +26,7 @@ class CategoriesController < ApplicationController
   # POST /categories.json
   def create
     @category = Category.new(category_params)
+    @category.group_id = params[:group_id].to_i if params[:group_id]
 
     respond_to do |format|
       if @category.save
@@ -56,12 +58,25 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
-      format.json { head :no_content }
+      format.json
+    end
+  end
+
+  def account_groups
+    @groups = Group.groups_for(params['account_id'].to_i)
+    @display_groups_dropdown = true
+    respond_to do |format|
+      format.js
     end
   end
 
   private
+
+  def form_dropdown_values
+    user_accounts = AccountUser.account_users_for(current_user.id)
+    @user_accounts ||= Account.accounts_for(user_accounts.map(&:account_id))
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_category
       @category = Category.find(params[:id])

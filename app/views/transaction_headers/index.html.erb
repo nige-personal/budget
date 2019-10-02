@@ -19,10 +19,10 @@
   <tbody>
     <% @transaction_headers.each do |transaction_header| %>
       <tr>
-        <td><%= transaction_header.user %></td>
+        <td><%= transaction_header.user.email %></td>
         <td><%= transaction_header.transaction_date %></td>
-        <td><%= transaction_header.account %></td>
-        <td><%= transaction_header.supplier %></td>
+        <td><%= transaction_header.account.name %></td>
+        <td><%= transaction_header.supplier.name %></td>
         <td><%= transaction_header.sign %></td>
         <td><%= transaction_header.reconciled %></td>
         <td><%= transaction_header.total %></td>

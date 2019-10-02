@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :transaction_items
   resources :transaction_headers
-  resources :categories
+  resources :categories do
+    get 'account_groups', action: :account_groups
+  end
   resources :groups
   resources :suppliers
   resources :account_users

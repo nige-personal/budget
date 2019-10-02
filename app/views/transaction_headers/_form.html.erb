@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :transaction_header_user_id %>
+    <%= form.collection_select :id, @users, :id, :email %>
   </div>
 
   <div class="field">
@@ -34,11 +34,6 @@
   <div class="field">
     <%= form.label :sign %>
     <%= form.text_field :sign, id: :transaction_header_sign %>
-  </div>
-
-  <div class="field">
-    <%= form.label :reconciled %>
-    <%= form.date_select :reconciled, id: :transaction_header_reconciled %>
   </div>
 
   <div class="field">

@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= form.label :account_id %>
-    <%= form.text_field :account_id, id: :account_user_account_id %>
+       <%= form.collection_select :account_id, @user_accounts, :id, :name, {:include_blank => 'Select an Account'}%>
   </div>
 
   <div class="field">
     <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :account_user_user_id %>
+    <%= form.collection_select :id, @users, :id, :email %>
   </div>
 
   <div class="field">

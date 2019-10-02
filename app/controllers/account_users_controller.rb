@@ -1,5 +1,6 @@
 class AccountUsersController < ApplicationController
   before_action :set_account_user, only: [:show, :edit, :update, :destroy]
+  before_action :form_dropdown_values, only: %i(new create edit)
 
   # GET /account_users
   # GET /account_users.json
@@ -62,6 +63,13 @@ class AccountUsersController < ApplicationController
   end
 
   private
+
+  def form_dropdown_values
+    user_accounts = AccountUser.account_users_for(current_user.id)
+    @user_accounts ||= Account.accounts_for(user_accounts.map(&:account_id))
+    @users = User.where(id: current_user.id)
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_account_user
       @account_user = AccountUser.find(params[:id])
