@@ -2,7 +2,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @transaction_header.user %>
+  <%= @transaction_header.user.email %>
 </p>
 
 <p>
@@ -12,12 +12,12 @@
 
 <p>
   <strong>Account:</strong>
-  <%= @transaction_header.account %>
+  <%= @transaction_header.account.name %>
 </p>
 
 <p>
   <strong>Supplier:</strong>
-  <%= @transaction_header.supplier %>
+  <%= @transaction_header.supplier.name %>
 </p>
 
 <p>

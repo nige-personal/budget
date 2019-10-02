@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :category_id %>
-    <%= form.text_field :category_id, id: :transaction_item_category_id %>
+    <%= form.collection_select :category_id, @account_categories, :id, :name, {:include_blank => 'Select an Category'}%>
   </div>
 
   <div class="field">

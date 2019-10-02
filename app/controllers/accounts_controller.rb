@@ -4,7 +4,8 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.accounts_for(current_user.id);
+    user_accounts = AccountUser.account_users_for(current_user.id)
+    @accounts ||= Account.accounts_for(user_accounts.map(&:account_id))
   end
 
   # GET /accounts/1

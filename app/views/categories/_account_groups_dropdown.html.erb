@@ -1,0 +1,5 @@
+<% if @display_groups_dropdown %>
+  <div class="field">
+    <%= select_tag :group_id, options_from_collection_for_select(groups, :id, :name), { include_blank: 'Select a Group'} %>
+  </div>
+<% end %>

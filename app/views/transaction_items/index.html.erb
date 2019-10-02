@@ -16,10 +16,10 @@
   <tbody>
     <% @transaction_items.each do |transaction_item| %>
       <tr>
-        <td><%= transaction_item.category %></td>
+        <td><%= transaction_item.category.name %></td>
         <td><%= transaction_item.amount %></td>
         <td><%= transaction_item.description %></td>
-        <td><%= transaction_item.transaction_header %></td>
+        <td><%= transaction_item.transaction_header.id %></td>
         <td><%= link_to 'Show', transaction_item %></td>
         <td><%= link_to 'Edit', edit_transaction_item_path(transaction_item) %></td>
         <td><%= link_to 'Destroy', transaction_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>

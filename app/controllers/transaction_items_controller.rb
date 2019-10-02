@@ -1,5 +1,6 @@
 class TransactionItemsController < ApplicationController
   before_action :set_transaction_item, only: [:show, :edit, :update, :destroy]
+  before_action :form_dropdown_values, only: %i(new create edit)
 
   # GET /transaction_items
   # GET /transaction_items.json
@@ -62,6 +63,11 @@ class TransactionItemsController < ApplicationController
   end
 
   private
+
+  def form_dropdown_values
+    @account_categories = Category.for_account(1)
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction_item
       @transaction_item = TransactionItem.find(params[:id])

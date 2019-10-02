@@ -19,7 +19,7 @@
         <td><%= supplier.name %></td>
         <td><%= supplier.description %></td>
         <td><%= supplier.location %></td>
-        <td><%= supplier.account %></td>
+        <td><%= supplier.account.name %></td>
         <td><%= link_to 'Show', supplier %></td>
         <td><%= link_to 'Edit', edit_supplier_path(supplier) %></td>
         <td><%= link_to 'Destroy', supplier, method: :delete, data: { confirm: 'Are you sure?' } %></td>

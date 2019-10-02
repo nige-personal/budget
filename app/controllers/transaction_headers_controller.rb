@@ -1,5 +1,6 @@
 class TransactionHeadersController < ApplicationController
   before_action :set_transaction_header, only: [:show, :edit, :update, :destroy]
+  before_action :form_dropdown_values, only: %i(new create edit)
 
   # GET /transaction_headers
   # GET /transaction_headers.json
@@ -62,6 +63,11 @@ class TransactionHeadersController < ApplicationController
   end
 
   private
+
+    def form_dropdown_values
+      @users = User.where(id: current_user.id)
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction_header
       @transaction_header = TransactionHeader.find(params[:id])

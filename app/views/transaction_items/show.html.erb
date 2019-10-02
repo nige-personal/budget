@@ -2,7 +2,7 @@
 
 <p>
   <strong>Category:</strong>
-  <%= @transaction_item.category %>
+  <%= @transaction_item.category.name %>
 </p>
 
 <p>
@@ -13,11 +13,6 @@
 <p>
   <strong>Description:</strong>
   <%= @transaction_item.description %>
-</p>
-
-<p>
-  <strong>Transaction header:</strong>
-  <%= @transaction_item.transaction_header %>
 </p>
 
 <%= link_to 'Edit', edit_transaction_item_path(@transaction_item) %> |
