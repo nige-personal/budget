@@ -5,4 +5,10 @@ class AccountUser < ApplicationRecord
   def self.account_users_for(user_id)
     AccountUser.where(user: user_id)
   end
+
+  def self.accounts_for(user_id)
+    account_users = AccountUser.where(user: user_id)
+    binding.pry
+    accounts_for_user = Account.where(id: account_users.map(&:id))
+  end
 end

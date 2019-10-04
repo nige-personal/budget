@@ -65,18 +65,19 @@ class AccountUsersController < ApplicationController
   private
 
   def form_dropdown_values
+    AccountUser.accounts_for(current_user.id)
     user_accounts = AccountUser.account_users_for(current_user.id)
     @user_accounts ||= Account.accounts_for(user_accounts.map(&:account_id))
     @users = User.where(id: current_user.id)
   end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_account_user
-      @account_user = AccountUser.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_account_user
+    @account_user = AccountUser.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def account_user_params
-      params.require(:account_user).permit(:account_id, :user_id, :privilege)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def account_user_params
+    params.require(:account_user).permit(:account_id, :user_id, :privilege)
+  end
 end
