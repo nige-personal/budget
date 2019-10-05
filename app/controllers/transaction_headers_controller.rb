@@ -11,6 +11,7 @@ class TransactionHeadersController < ApplicationController
   # GET /transaction_headers/1
   # GET /transaction_headers/1.json
   def show
+    set_transaction_items
   end
 
   # GET /transaction_headers/new
@@ -63,18 +64,21 @@ class TransactionHeadersController < ApplicationController
   end
 
   private
+  def set_transaction_items
+    @transaction_items = TransactionItem.where(transaction_header_id: @transaction_header.id)
+  end
 
-    def form_dropdown_values
-      @users = User.where(id: current_user.id)
-    end
+  def form_dropdown_values
+    @users = User.where(id: current_user.id)
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_transaction_header
-      @transaction_header = TransactionHeader.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_transaction_header
+    @transaction_header = TransactionHeader.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def transaction_header_params
-      params.require(:transaction_header).permit(:user_id, :transaction_date, :account_id, :supplier_id, :sign, :reconciled, :total)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def transaction_header_params
+    params.require(:transaction_header).permit(:user_id, :transaction_date, :account_id, :supplier_id, :sign, :reconciled, :total)
+  end
 end
