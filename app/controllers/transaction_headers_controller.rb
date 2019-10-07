@@ -27,7 +27,6 @@ class TransactionHeadersController < ApplicationController
   # POST /transaction_headers.json
   def create
     @transaction_header = TransactionHeader.new(transaction_header_params)
-
     respond_to do |format|
       if @transaction_header.save
         format.html { redirect_to @transaction_header, notice: 'Transaction header was successfully created.' }
