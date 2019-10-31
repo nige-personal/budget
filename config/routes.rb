@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :group_categories
   resources :transaction_items
   resources :transaction_headers
   resources :categories do

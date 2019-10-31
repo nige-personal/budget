@@ -4,8 +4,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    user_accounts = AccountUser.account_users_for(current_user.id)
-    @accounts ||= Account.accounts_for(user_accounts.map(&:account_id))
+    @accounts = Account.accounts_for_user(current_user.id)
   end
 
   # GET /accounts/1
@@ -17,7 +16,6 @@ class AccountsController < ApplicationController
   # GET /accounts/new
   def new
     @account = Account.new
-    @account.transaction_headers.build
   end
 
   # GET /accounts/1/edit
@@ -28,6 +26,7 @@ class AccountsController < ApplicationController
   # POST /accounts.json
   def create
     @account = Account.new(account_params)
+    @account.user_id = current_user.id
     respond_to do |format|
       if @account.save
         format.html { redirect_to @account, notice: 'Account was successfully created.' }
@@ -75,6 +74,6 @@ class AccountsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def account_params
-    params.require(:account).permit(:name, :account_type, transaction_headers_attributes: [:user_id, :transaction_date, :account_id, :supplier_id, :sign, :reconciled, :total])
+    params.require(:account).permit(:name, :account_type)
   end
 end

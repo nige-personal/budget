@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :account_id %>
-    <%= form.text_field :account_id, id: :group_account_id %>
+    <%= form.collection_select :account_id, @user_accounts, :id, :name, {:include_blank => 'Select an Account'}%>
   </div>
 
   <div class="actions">
