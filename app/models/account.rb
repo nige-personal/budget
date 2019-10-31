@@ -1,4 +1,5 @@
 class Account < ApplicationRecord
+  belongs_to :user
   has_many :account_users
   has_many :transaction_headers
 

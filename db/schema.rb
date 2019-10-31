@@ -28,8 +28,10 @@ ActiveRecord::Schema.define(version: 20190929104428) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.string "account_type"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -102,6 +104,7 @@ ActiveRecord::Schema.define(version: 20190929104428) do
 
   add_foreign_key "account_users", "accounts"
   add_foreign_key "account_users", "users"
+  add_foreign_key "accounts", "users"
   add_foreign_key "categories", "accounts"
   add_foreign_key "categories", "groups"
   add_foreign_key "groups", "accounts"
