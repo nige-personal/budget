@@ -5,7 +5,7 @@ class AccountUsersController < ApplicationController
   # GET /account_users
   # GET /account_users.json
   def index
-    @account_users = AccountUser.all
+    @account_users = AccountUser.account_users_for(current_user.id)
   end
 
   # GET /account_users/1
@@ -26,7 +26,6 @@ class AccountUsersController < ApplicationController
   # POST /account_users.json
   def create
     @account_user = AccountUser.new(account_user_params)
-
     respond_to do |format|
       if @account_user.save
         format.html { redirect_to @account_user, notice: 'Account user was successfully created.' }
@@ -65,10 +64,8 @@ class AccountUsersController < ApplicationController
   private
 
   def form_dropdown_values
-    AccountUser.accounts_for(current_user.id)
-    user_accounts = AccountUser.account_users_for(current_user.id)
-    @user_accounts ||= Account.accounts_for(user_accounts.map(&:account_id))
-    @users = User.where(id: current_user.id)
+    @user_accounts ||= Account.accounts_for([current_user.id])
+    @users = [current_user]
   end
 
   # Use callbacks to share common setup or constraints between actions.

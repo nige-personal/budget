@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190929104428) do
+ActiveRecord::Schema.define(version: 20191031202123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,19 +28,28 @@ ActiveRecord::Schema.define(version: 20190929104428) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.string "account_type"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.bigint "account_id"
-    t.bigint "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_categories_on_account_id"
-    t.index ["group_id"], name: "index_categories_on_group_id"
+  end
+
+  create_table "group_categories", force: :cascade do |t|
+    t.bigint "category_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_group_categories_on_category_id"
+    t.index ["group_id"], name: "index_group_categories_on_group_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -102,8 +111,10 @@ ActiveRecord::Schema.define(version: 20190929104428) do
 
   add_foreign_key "account_users", "accounts"
   add_foreign_key "account_users", "users"
+  add_foreign_key "accounts", "users"
   add_foreign_key "categories", "accounts"
-  add_foreign_key "categories", "groups"
+  add_foreign_key "group_categories", "categories"
+  add_foreign_key "group_categories", "groups"
   add_foreign_key "groups", "accounts"
   add_foreign_key "suppliers", "accounts"
   add_foreign_key "transaction_headers", "accounts"

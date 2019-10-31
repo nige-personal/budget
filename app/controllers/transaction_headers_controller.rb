@@ -17,6 +17,7 @@ class TransactionHeadersController < ApplicationController
   # GET /transaction_headers/new
   def new
     @transaction_header = TransactionHeader.new
+    @transaction_header.transaction_items.build
   end
 
   # GET /transaction_headers/1/edit
@@ -27,7 +28,6 @@ class TransactionHeadersController < ApplicationController
   # POST /transaction_headers.json
   def create
     @transaction_header = TransactionHeader.new(transaction_header_params)
-
     respond_to do |format|
       if @transaction_header.save
         format.html { redirect_to @transaction_header, notice: 'Transaction header was successfully created.' }
@@ -79,6 +79,6 @@ class TransactionHeadersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def transaction_header_params
-    params.require(:transaction_header).permit(:user_id, :transaction_date, :account_id, :supplier_id, :sign, :reconciled, :total)
+    params.require(:transaction_header).permit(:user_id, :transaction_date, :account_id, :supplier_id, :sign, :reconciled, :total, transaction_items_attributes: [:category_id, :amount, :description])
   end
 end

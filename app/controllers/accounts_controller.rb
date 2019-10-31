@@ -4,8 +4,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    user_accounts = AccountUser.account_users_for(current_user.id)
-    @accounts ||= Account.accounts_for(user_accounts.map(&:account_id))
+    @accounts = Account.accounts_for_user(current_user.id)
   end
 
   # GET /accounts/1
@@ -27,7 +26,7 @@ class AccountsController < ApplicationController
   # POST /accounts.json
   def create
     @account = Account.new(account_params)
-
+    @account.user_id = current_user.id
     respond_to do |format|
       if @account.save
         format.html { redirect_to @account, notice: 'Account was successfully created.' }
